@@ -3,6 +3,7 @@ import cors from 'cors';
 
 import config from './config.js';
 import connectionDB from './helpers/connectDB.js';
+import routes from './routes/index.js';
 
 const app = express();
 
@@ -24,6 +25,9 @@ app.use((req, res, next) => {
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
+// Routes
+app.use('/api', routes);
 
 // Server configuration
 const { port } = config || 8080;
