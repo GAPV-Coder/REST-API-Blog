@@ -1,5 +1,6 @@
 import {
     createArticleService,
+    getArticleByIdService,
     getArticlesService,
 } from '../services/article.services.js';
 
@@ -33,5 +34,19 @@ export const getArticlesController = async (req, res) => {
         });
     } catch (error) {
         res.status(500).json({ error: error.message });
+    }
+};
+
+export const getArticleByIdController = async (req, res) => {
+    try {
+        const { id: articleId } = req.params;
+        const article = await getArticleByIdService(articleId);
+
+        res.status(201).json({
+            message: 'Successful user query',
+            data: article,
+        });
+    } catch (error) {
+        res.status(500).json({ error: 'The specified article does not exist' });
     }
 };

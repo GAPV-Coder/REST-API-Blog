@@ -23,3 +23,17 @@ export const getArticlesService = async () => {
         throw new Error(`Error retrieving items: ${error.message}`, 500);
     }
 };
+
+export const getArticleByIdService = async (articleId) => {
+    try {
+        const article = await Article.findById(articleId);
+
+        if (!article) {
+            throw new Error('Article not found', 404);
+        }
+
+        return article;
+    } catch (error) {
+        throw new Error(`Error getting article by id: ${error.message}`);
+    }
+};

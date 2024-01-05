@@ -3,6 +3,6 @@ import articleRoutes from './article.routes.js';
 
 const routerApi = Router();
 
-routerApi.use('/article', articleRoutes);
+routerApi.use('/articles', articleRoutes);
 
 export default routerApi;
