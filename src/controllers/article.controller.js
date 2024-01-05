@@ -2,6 +2,7 @@ import {
     createArticleService,
     getArticleByIdService,
     getArticlesService,
+    updateArticleService,
 } from '../services/article.services.js';
 
 export const createArticleController = async (req, res) => {
@@ -48,5 +49,24 @@ export const getArticleByIdController = async (req, res) => {
         });
     } catch (error) {
         res.status(500).json({ error: 'The specified article does not exist' });
+    }
+};
+
+export const updateArticleController = async (req, res) => {
+    try {
+        const articleId = req.params.id;
+        const updatedArticleData = req.body;
+
+        const updatedArticle = await updateArticleService(
+            articleId,
+            updatedArticleData,
+        );
+
+        res.status(201).json({
+            message: 'Item has been modified',
+            data: updatedArticle,
+        });
+    } catch (error) {
+        res.status(500).json({ error: 'The article has not been updated' });
     }
 };

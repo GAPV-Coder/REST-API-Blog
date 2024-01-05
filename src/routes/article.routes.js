@@ -3,6 +3,7 @@ import {
     createArticleController,
     getArticleByIdController,
     getArticlesController,
+    updateArticleController,
 } from '../controllers/article.controller.js';
 import { articleValidation } from '../middlewares/validations.middleware.js';
 
@@ -13,5 +14,7 @@ router.post('/create', articleValidation, createArticleController);
 router.get('/all-articles/:last_articles?', getArticlesController);
 
 router.get('/article-by-id/:id', getArticleByIdController);
+
+router.put('/update/:id', updateArticleController);
 
 export default router;

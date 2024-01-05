@@ -37,3 +37,21 @@ export const getArticleByIdService = async (articleId) => {
         throw new Error(`Error getting article by id: ${error.message}`);
     }
 };
+
+export const updateArticleService = async (articleId, updatedArticleData) => {
+    try {
+        const updatedArticle = await Article.findByIdAndUpdate(
+            articleId,
+            { $set: updatedArticleData },
+            { new: true },
+        );
+
+        if (!updatedArticle) {
+            throw new Error(`Failed to update the article`);
+        }
+
+        return updatedArticle;
+    } catch (error) {
+        throw new Error(`Error updating article: ${error.message}`);
+    }
+};
