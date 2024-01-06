@@ -55,3 +55,17 @@ export const updateArticleService = async (articleId, updatedArticleData) => {
         throw new Error(`Error updating article: ${error.message}`);
     }
 };
+
+export const deleteArticleService = async (articleId) => {
+    try {
+        const deletedArticle = await Article.findByIdAndDelete(articleId);
+
+        if (!deletedArticle) {
+            throw new Error('Article not found', 404);
+        }
+
+        return deletedArticle;
+    } catch (error) {
+        throw new Error(`Error deleting article: ${error.message}`);
+    }
+};

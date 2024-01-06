@@ -1,5 +1,6 @@
 import {
     createArticleService,
+    deleteArticleService,
     getArticleByIdService,
     getArticlesService,
     updateArticleService,
@@ -68,5 +69,23 @@ export const updateArticleController = async (req, res) => {
         });
     } catch (error) {
         res.status(500).json({ error: 'The article has not been updated' });
+    }
+};
+
+export const deleteArticleController = async (req, res) => {
+    try {
+        const { id: articleId } = req.params;
+        const deletedArticle = await deleteArticleService(articleId);
+
+        res.status(200).json({
+            message: 'Article successfully deleted',
+            data: deletedArticle,
+        });
+    } catch (error) {
+        if (error.statusCode === 404) {
+            res.status(404).json({ error: 'Article not found' });
+        } else {
+            res.status(500).json({ error: 'Internal Server Error' });
+        }
     }
 };
